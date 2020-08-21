@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoContent</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      body {
+        background-color: lightsteelblue;
+      }
+      .card {
+        padding: 10px;
+        background-color: white;
+        margin: 10px 5px;
+      }
+      #app {
+        width: 80%;
+        position: relative;
+        margin: 0 auto;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      Status: {{ status }}
+      <div class="grid">
+        <div class="card" v-for="(data, index) in scrap">
+          <div class="card" style="background-color: lime;">
+           <img width="200px" :src="data.display_url" alt="">
+          </div>
+          <div class="card" style="background-color:red;">
+            {{ index }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+new Vue({
+    el: "#app",
+    data: {
+      status: 'tes',
+      scrap: []
+    },
+    created() {
+      // this.get();
+    },
+    methods: {
+      get() {
+        axios
+          .get("http://localhost:3000/ig/tags/tescode")
+          .then((res) => {
+            this.message = res.data.medias;
+          })
+          .catch((err) => {
+            this.message = err;
+          });
+      },
+    },
+    mounted(){
+      this.status = 'Get content!'
+      this.scrap = 'Get content!....'
+      axios.get('http://localhost:3000/ig/tags/belajarcoding')
+      .then((res)=>{
+        console.log(res.data.data.medias);
+        this.scrap = res.data.data.medias
+        this.status = 'done!'
+      })
+      .catch((err)=>{
+        this.status = err
+      })
+    }
+  });
+</script>

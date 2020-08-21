@@ -11,6 +11,7 @@
   "dependencies": {
     "canvas": "^2.6.1",
     "fastify": "^3.2.0",
+    "fastify-cors": "^4.1.0",
     "instagram-scraping": "^1.0.13",
     "node-tesseract-ocr": "^2.0.0"
   }
