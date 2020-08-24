@@ -1,6 +1,6 @@
 const fastify = require("fastify")({ logger: true });
 const instagram = require("./modul/instagram");
-var draw = require("./modul/canva");
+const draw = require("./modul/canva");
 
 
 fastify.register(require('fastify-cors'), { 
